@@ -1,6 +1,6 @@
 import requests
 
-url = 'https://api.example.com/data'  # замените на нужный URL
+url = 'https://api.github.com/repos/armbian/build/releases'  # замените на нужный URL
 
 try:
     response = requests.get(url)
