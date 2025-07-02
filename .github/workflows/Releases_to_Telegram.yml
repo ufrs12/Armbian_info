@@ -22,6 +22,7 @@ jobs:                           # выполняемые в рамках скр�
         python -m pip install --upgrade pip
         # если есть requirements.txt, раскомментируйте:
         # pip install -r requirements.txt
+        
     - name: Install requests lib
       run: pip install requests
 
