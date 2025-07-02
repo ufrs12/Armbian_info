@@ -26,5 +26,5 @@ jobs:                           # выполняемые в рамках скр�
       run: pip install requests
 
     - name: Run Python script
-      run: python ./scripts.py
+      run: python ./scripts/releases.py
 
