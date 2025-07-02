@@ -15,7 +15,7 @@ except requests.RequestException as e:
 except ValueError:
     print('Ответ не содержит корректный JSON')
 
-url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + first_item
+url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + str(first_item)
 try:
     response = requests.get(url)
     response.raise_for_status()  # проверка успешности запроса (код 200)
