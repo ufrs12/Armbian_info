@@ -33,7 +33,12 @@ def find_all_names(obj):
             names.extend(find_all_names(item))
     return names
 
-url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + rs
+obj = json.loads(data)
+names_list = find_all_names(obj)
+result_str = ", ".join(names_list)
+print(result_str)  # Alice, Bob, Charlie
+
+url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + result_str
 try:
     response = requests.get(url)
     response.raise_for_status()  # проверка успешности запроса (код 200)
@@ -43,9 +48,3 @@ except requests.RequestException as e:
     print(f'Ошибка запроса: {e}')
 except ValueError:
     print('Ответ не содержит корректный JSON')
-
-obj = json.loads(data)
-names_list = find_all_names(obj)
-result_str = ", ".join(names_list)
-
-print(result_str)  # Alice, Bob, Charlie
