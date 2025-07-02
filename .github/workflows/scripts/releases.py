@@ -11,3 +11,4 @@ except requests.RequestException as e:
     print(f'Ошибка запроса: {e}')
 except ValueError:
     print('Ответ не содержит корректный JSON')
+    
