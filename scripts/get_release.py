@@ -13,13 +13,11 @@ try:
     if github_env:
         with open(github_env, 'a') as f:
             f.write(f"CURRENT={json.dumps(first_item)}\n")
+            f.write(f"CURRENT_NAME={first_item['name']}\n")
     else:
         print("Error: GITHUB_ENV variable not found")
    
     print('еременная курент' + os.environ['CURRENT'])
-        
-    export CURRENT=json.dumps(first_item)
-    export CURRENT_NAME = first_item['name']
     print(first_item['name'])
 except requests.RequestException as e:
     print(f'Ошибка запроса: {e}')
