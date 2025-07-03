@@ -7,7 +7,8 @@ try:
     response = requests.get(url)
     response.raise_for_status()  # проверка успешности запроса (код 200)
     data = response.json()       # парсим JSON из ответа
-    os.environ['CURRENT'] = json.dumps(next(iter(data), None))
+    first_item = next(iter(data), None)
+    os.environ['CURRENT'] = json.dumps(first_item)
     os.environ['CURRENT_NAME'] = first_item['name']
     print(first_item['name'])
 except requests.RequestException as e:
