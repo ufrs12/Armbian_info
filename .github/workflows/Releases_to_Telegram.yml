@@ -28,5 +28,6 @@ jobs:                            # выполняемые в рамках скр
           python scripts/send_to_channel.py
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "Update file.txt from GitHub Actions" || echo "No changes to commit"
+          git add current.json
+          git commit -m "Your commit message"
           git push
