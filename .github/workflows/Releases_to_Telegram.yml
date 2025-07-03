@@ -9,7 +9,8 @@ jobs:                           # выполняемые в рамках скр�
   Releases_to_Telegram:
     runs-on: ubuntu-latest      # запускаем на образе последней версии ubuntu
     env:
-      current_name: current_name
+      CURRENT: current
+      CURRENT_NAME: current_name
       
     steps:
     - uses: actions/checkout@v3
@@ -28,10 +29,13 @@ jobs:                           # выполняемые в рамках скр�
 #    - name: Install requests lib
 #     run: pip install requests
 
-    - name: Run Python script
-      env:                                                  # задаём переменные среды для текущей работы
-        TG_KEY: ${{ secrets.TG_KEY }}                       # TG_KEY берется из "секрета" репозитория с именем "TgKey" - это API-ключ для управления Telegram-ботом 
-        TG_CHANNEL_ID: ${{ secrets.TG_CHANNEL_ID }}         # TG_CHANNEL_ID берется из "секрета" репозитория с именем "TgChannelId" - это id канала, куда будут публиковаться сообщения от бота
-      run: python scripts/releases.py
+    - name: Get latest release
+      run: python scripts/get_release.py
+
+#    - name: Run Python script
+#      env:                                                  # задаём переменные среды для текущей работы
+#        TG_KEY: ${{ secrets.TG_KEY }}                       # TG_KEY берется из "секрета" репозитория с именем "TgKey" - это API-ключ для управления Telegram-ботом 
+#        TG_CHANNEL_ID: ${{ secrets.TG_CHANNEL_ID }}         # TG_CHANNEL_ID берется из "секрета" репозитория с именем "TgChannelId" - это id канала, куда будут публиковаться сообщения от бота
+#      run: python scripts/releases.py
       
 
