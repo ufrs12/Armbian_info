@@ -18,7 +18,7 @@ except ValueError:
 name = first_item['name']
 body = first_item['body']
 
-url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + '@Sean_bot html' + name + body
+url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + name + '@Sean_bot html' + body
 try:
     response = requests.get(url)
     response.raise_for_status()  # проверка успешности запроса (код 200)
