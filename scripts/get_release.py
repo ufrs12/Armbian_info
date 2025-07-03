@@ -12,9 +12,11 @@ try:
     github_env = os.environ.get('GITHUB_ENV')
     if github_env:
         with open(github_env, 'a') as f:
-            f.write(f"CURRENT=json.dumps(first_item)")
+            f.write(f"CURRENT={json.dumps(first_item)}\n")
     else:
         print("Error: GITHUB_ENV variable not found")
+   
+   print('еременная курент' + os.environ['CURRENT'])
         
     export CURRENT=json.dumps(first_item)
     export CURRENT_NAME = first_item['name']
