@@ -1,8 +1,8 @@
-name: Releases to Telegram      # название скрипта, которое будет отображаться во вкладке Actions репозитория
+name: Releases to Telegram       # название скрипта, которое будет отображаться во вкладке Actions репозитория
 
 on:                              # действие, по которому запускается скрипт
-  #schedule:                     # в данном случае, это выполнение по таймеру
-    #- cron: '0 5-20/2 * * *'    # каждый день каждые 2 часа в часы с 5 по 20 по UTC+0', то есть в 5, 7, 9, 11, 13, 15, 17, 19 по UTC+0
+  schedule:                      # в данном случае, это выполнение по таймеру
+    - cron: '0 0,8,16 * * *'     # запускает workflow в 00:00, 08:00 и 16:00 по UTC каждый день.
   workflow_dispatch:             # чтобы скрипт можно было запускать вручную
 
 jobs:                            # выполняемые в рамках скрипта работы
@@ -29,5 +29,5 @@ jobs:                            # выполняемые в рамках скр
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add current.json
-          git commit -m "Your commit message"
+          git commit -m "Вышел релиз, поменялся current.json"
           git push
