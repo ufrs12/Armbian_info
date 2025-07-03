@@ -14,5 +14,5 @@ except requests.RequestException as e:
 except ValueError:
     print('Ответ не содержит корректный JSON')
 
-with open('../current.json', 'w', encoding='utf-8') as f:
+with open('current.json', 'w', encoding='utf-8') as f:
     f.write(os.environ['CURRENT'])

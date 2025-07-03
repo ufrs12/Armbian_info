@@ -18,4 +18,4 @@ except ValueError:
 
 with open('current.json') as s:
   current = json.load(s)
-os.environ['CURRENT_NAME_IN_REPO'] = current[name]
+os.environ['CURRENT_NAME_IN_REPO'] = current['name']
