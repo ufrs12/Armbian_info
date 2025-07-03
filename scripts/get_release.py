@@ -16,7 +16,7 @@ try:
     else:
         print("Error: GITHUB_ENV variable not found")
    
-   print('еременная курент' + os.environ['CURRENT'])
+    print('еременная курент' + os.environ['CURRENT'])
         
     export CURRENT=json.dumps(first_item)
     export CURRENT_NAME = first_item['name']
