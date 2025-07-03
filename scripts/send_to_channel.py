@@ -2,20 +2,17 @@ import requests
 import os
 import json
 
-url = 'https://api.github.com/repos/armbian/build/releases'  # замените на нужный URL
+body = 'https://github.com/armbian/build/releases/tag/'
+url = 'https://api.telegram.org/bot' + os.environ.get('TG_KEY') + '/sendmessage?chat_id=' + os.environ.get('TG_CHANNEL_ID') + '&text=' + os.environ['CURRENT_NAME'] + ' \n' + body + os.environ['CURRENT_NAME']
 try:
     response = requests.get(url)
     response.raise_for_status()  # проверка успешности запроса (код 200)
     data = response.json()       # парсим JSON из ответа
-    first_item = next(iter(data), None)
-    os.environ['CURRENT'] = json.dumps(first_item)
-    os.environ['CURRENT_NAME'] = first_item['name']
-    print(first_item['name'])
+    print(data)
 except requests.RequestException as e:
     print(f'Ошибка запроса: {e}')
 except ValueError:
     print('Ответ не содержит корректный JSON')
 
-with open('../current.json') as s:
-  current = json.load(s)
-os.environ['CURRENT_NAME_IN_REPO'] = current[name]
+with open('../current.json', 'w', encoding='utf-8') as f:
+    f.write(os.environ['CURRENT'])

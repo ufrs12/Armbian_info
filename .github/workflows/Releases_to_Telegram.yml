@@ -1,41 +1,29 @@
 name: Releases to Telegram      # название скрипта, которое будет отображаться во вкладке Actions репозитория
 
-on:                             # действие, по которому запускается скрипт
+on:                              # действие, по которому запускается скрипт
   #schedule:                     # в данном случае, это выполнение по таймеру
-    #- cron: '0 5-20/2 * * *'    # 'каждый день каждые 2 часа в часы с 5 по 20 по UTC+0', то есть в 5, 7, 9, 11, 13, 15, 17, 19 по UTC+0
-  workflow_dispatch:            # чтобы скрипт можно было запускать вручную
+    #- cron: '0 5-20/2 * * *'    # каждый день каждые 2 часа в часы с 5 по 20 по UTC+0', то есть в 5, 7, 9, 11, 13, 15, 17, 19 по UTC+0
+  workflow_dispatch:             # чтобы скрипт можно было запускать вручную
 
-jobs:                           # выполняемые в рамках скрипта работы
-  Releases_to_Telegram:
-    runs-on: ubuntu-latest      # запускаем на образе последней версии ubuntu
-    env:
+jobs:                            # выполняемые в рамках скрипта работы
+  Releases_to_Telegram:          # имя джобы
+    runs-on: ubuntu-latest       # запускаем на образе последней версии ubuntu
+    env:                         # задаём переменные окружения для джобы
       CURRENT: current
       CURRENT_NAME: current_name
+      CURRENT_NAME_IN_REPO: current_name_in_repo
       
     steps:
     - uses: actions/checkout@v3
 
-    #- name: Set up Python
-    #  uses: actions/setup-python@v4
-    #  with:
-    #    python-version: '3.x'
-
-#    - name: Install dependencies
-#      run: |
-#        python -m pip install --upgrade pip
-#        # если есть requirements.txt, раскомментируйте:
-#        # pip install -r requirements.txt
-
-#    - name: Install requests lib
-#     run: pip install requests
-
     - name: Get latest release
       run: python scripts/get_release.py
 
-#    - name: Run Python script
-#      env:                                                  # задаём переменные среды для текущей работы
-#        TG_KEY: ${{ secrets.TG_KEY }}                       # TG_KEY берется из "секрета" репозитория с именем "TgKey" - это API-ключ для управления Telegram-ботом 
-#        TG_CHANNEL_ID: ${{ secrets.TG_CHANNEL_ID }}         # TG_CHANNEL_ID берется из "секрета" репозитория с именем "TgChannelId" - это id канала, куда будут публиковаться сообщения от бота
-#      run: python scripts/releases.py
+    - name: Send to channel
+      if: success() && env.CURRENT_NAME != env.CURRENT_NAME_IN_REPO
+      env:                                                  # задаём переменные окружения
+        TG_KEY: ${{ secrets.TG_KEY }}                       # TG_KEY берется из "секрета" репозитория с именем "TG_KEY" - это API-ключ для управления Telegram-ботом 
+        TG_CHANNEL_ID: ${{ secrets.TG_CHANNEL_ID }}         # TG_CHANNEL_ID берется из "секрета" репозитория с именем "TG_CHANNEL_ID" - это id канала, куда будут публиковаться сообщения от бота
+      run: python scripts/send_to_channel.py
       
 
