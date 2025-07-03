@@ -8,23 +8,25 @@ on:                             # действие, по которому зап
 jobs:                           # выполняемые в рамках скрипта работы
   Releases_to_Telegram:
     runs-on: ubuntu-latest      # запускаем на образе последней версии ubuntu
-
+    env:
+      current_name: current_name
+      
     steps:
     - uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.x'
+    #- name: Set up Python
+    #  uses: actions/setup-python@v4
+    #  with:
+    #    python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        # если есть requirements.txt, раскомментируйте:
-        # pip install -r requirements.txt
-        
-    - name: Install requests lib
-      run: pip install requests
+#    - name: Install dependencies
+#      run: |
+#        python -m pip install --upgrade pip
+#        # если есть requirements.txt, раскомментируйте:
+#        # pip install -r requirements.txt
+
+#    - name: Install requests lib
+#     run: pip install requests
 
     - name: Run Python script
       env:                                                  # задаём переменные среды для текущей работы
