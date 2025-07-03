@@ -16,6 +16,6 @@ except requests.RequestException as e:
 except ValueError:
     print('Ответ не содержит корректный JSON')
 
-with open('../current.json') as s:
+with open('current.json') as s:
   current = json.load(s)
 os.environ['CURRENT_NAME_IN_REPO'] = current[name]
