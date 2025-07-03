@@ -24,6 +24,10 @@ jobs:                            # выполняемые в рамках скр
       env:                                                  # задаём переменные окружения
         TG_KEY: ${{ secrets.TG_KEY }}                       # TG_KEY берется из "секрета" репозитория с именем "TG_KEY" - это API-ключ для управления Telegram-ботом 
         TG_CHANNEL_ID: ${{ secrets.TG_CHANNEL_ID }}         # TG_CHANNEL_ID берется из "секрета" репозитория с именем "TG_CHANNEL_ID" - это id канала, куда будут публиковаться сообщения от бота
-      run: python scripts/send_to_channel.py
-      
-
+      run: |
+          python scripts/send_to_channel.py
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add file.txt
+          git commit -m "Update file.txt from GitHub Actions" || echo "No changes to commit"
+          git push
