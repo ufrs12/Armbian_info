@@ -20,6 +20,5 @@ if github_env:
         f.write(f"CURRENT_NAME_IN_REPO={current['name']}\n")
 else:
     print("Error: GITHUB_ENV variable not found")
-   
-print('Переменная курент' + os.environ['CURRENT'])
-print(first_item['name'])
+
+print("Полученный релиз - " + first_item['name'])
